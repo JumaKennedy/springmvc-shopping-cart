@@ -36,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 		     "/checkingout","/deleteItem","/emptycart","/updateQty","/confirmation","/users",
                 		     "/search").permitAll()
                 
-                .antMatchers("/cutomerOrders","/activate","/editrole","/saveproduct","/editproduct","/deleteproduct","/delete")
+                .antMatchers("/cutomerOrders","/setimg","/removeimg","/activate","/editrole","/saveproduct","/editproduct","/deleteproduct","/delete")
                 .hasAnyAuthority("ADMIN","DBA")
                 
                 .antMatchers("/profile","/myorders","/addcoment","/addcoment","/addimages",

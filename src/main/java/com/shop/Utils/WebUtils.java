@@ -235,7 +235,7 @@ public class WebUtils{
 	
 	
 	 	   
-	   public String removefiles(long id, String image, String folder) {
+	   public String removefiles(long id, String image) {
 		try {
 			String realPathtoUploads = 
 		    request.getSession().getServletContext()

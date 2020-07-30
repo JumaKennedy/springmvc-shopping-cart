@@ -2,6 +2,8 @@ package com.shop.controller;
 
 import java.io.IOException;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.shop.Utils.WebUtils;
 import com.shop.model.Products;
+import com.shop.repository.ImageRepository;
 import com.shop.repository.PaymentMethodRepository;
 import com.shop.repository.ProductRepository;
 
@@ -20,13 +23,16 @@ import com.shop.repository.ProductRepository;
 public class ProductCotroller {
 	
 	@Autowired
-	private ProductRepository repo;
+	private ProductRepository productRepository;
 	
 	@Autowired
 	PaymentMethodRepository paymentRepository;
 	
 	@Autowired
 	private WebUtils webUtils;
+	
+	@Autowired
+	ImageRepository imageRepository;
 	
 		
 	@PostMapping("saveproduct")
@@ -39,7 +45,7 @@ public class ProductCotroller {
 			// String fileName = file[0].getOriginalFilename();	         
 			 String parseMd5=webUtils.md5(file[0].getOriginalFilename().toLowerCase());
 	         pro.setImg(parseMd5);}
-			 repo.save(pro);
+			 productRepository.save(pro);
 			 webUtils.addproductImages(pro);			
 			redirect.addFlashAttribute("msg", "Product Saved");
 		} catch (Exception e) {
@@ -54,7 +60,8 @@ public class ProductCotroller {
 	String editproduct(@ModelAttribute Products pro, RedirectAttributes redirect) throws IllegalStateException, IOException {
 		
 		try {
-			 repo.save(pro);
+			
+			 productRepository.save(pro);
 			 webUtils.addproductImages(pro);			
 			 redirect.addFlashAttribute("msg", "Product Updated");
 		} catch (Exception e) {
@@ -65,9 +72,29 @@ public class ProductCotroller {
 		return "redirect:/profile";
 	}
 	
+	@GetMapping("setimg")
+	@Transactional
+	String setimg(@RequestParam Long id, @RequestParam String img) {
+		productRepository.findById(id).ifPresent(a->{
+			a.setImg(img);
+			productRepository.save(a);
+		});
+		
+		return "redirect:productdetails?id="+id;	
+	}
+	
+	@GetMapping("removeimg")
+	String deleteimg(@RequestParam Long id,@RequestParam Long imgid,  @RequestParam String img) {
+		
+		imageRepository.deleteById(imgid);
+		webUtils.removefiles(id, img);
+		
+		return "redirect:productdetails?id="+id;
+	}
+	
 	@GetMapping("deleteproduct")
 	String deleteproduct(@RequestParam Long id) {
-		repo.deleteById(id);
+		productRepository.deleteById(id);
 		return "redirect:profile";	
 	}
 	

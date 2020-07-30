@@ -282,19 +282,9 @@ public class ShoppingController {
 		
 	    return "confirmation";
 	}
-	//drop down selects
-	@ModelAttribute("shoes")
-	public List<String> shoe() {
-		List<String> size = new ArrayList<String>();
-		size.add("38");
-		size.add("39");
-		size.add("40");
-		size.add("41");
-		size.add("42");
-		return size;
-	}
+	//drop down selects	
 
-	@ModelAttribute("size")
+	@ModelAttribute("sizes")
 	public List<String> size() {
 		List<String> size = new ArrayList<String>();
 		size.add("S");
@@ -307,7 +297,7 @@ public class ShoppingController {
 		return size;
 	}
 
-	@ModelAttribute("col")
+	@ModelAttribute("cols")
 	public List<String> colour() {
 		List<String> col = new ArrayList<String>();
 		col.add("Blue");

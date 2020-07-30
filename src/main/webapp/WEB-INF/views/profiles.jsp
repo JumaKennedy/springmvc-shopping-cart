@@ -252,16 +252,29 @@
 			                    <div class="form-group">
 			                    <form:input path="price" value="${pi.price}" placeholder="product price" class="form-control"/>
 			                    </div>
-			                    <div class="form-group">
-			                    <form:input path="color" value="${pi.color}" placeholder="product color" class="form-control"/>
+			                    <div class="form-group">			                    
+			                    <form:select path="color" id="color" multiple="true" class="form-control" required="required" > 
+			                    <option value="" selected>${pi.color}</option>
+			                    <c:forEach items="${cols}" var="item">			                        
+			                        <option value="${item}" > ${item}</option>
+			                    </c:forEach>
+			                    </form:select>
 			                    </div>
 			                    <div class="form-group">
-			                    <form:textarea path="des" rows="6"  placeholder="Description" class="form-control"  required="required"/>
+			                    <form:select path="size" id="size" multiple="true" class="form-control" required="required" > 
+			                    <option value="" selected>${pi.size}</option>
+			                    <c:forEach items="${sizes}" var="item">
+			                            <option value="${item}" > ${item}</option>
+			                            </c:forEach>
+			                    </form:select>
+			                    </div>
+			                    <div class="form-group">
+			                    <form:textarea path="des" rows="6"  placeholder="Description ${pi.des}"  class="form-control"  required="required"/>
 			                   </div>
 			                    <form:input path="file" type="file" class="form-control" />					                             
 								<form:input path="file" type="file" class="form-control" />
 								<form:input path="file" type="file" class="form-control" /> 
-			                    <form:input type="hidden" path="email" value="${loggedInuser}" /><br>
+			                    <form:input type="hidden" path="email" value="${user_account.email}" /><br>
 			                    <button class="btn btn-main btn-icon" type="submit">Add </button>
 					           
 			                    </form:form>
@@ -312,7 +325,6 @@
 				    </c:if>
                </div>
                
-               
 						
 		</div>
 						
@@ -353,36 +365,6 @@
 				    </div>
 					</div> 
 					
-					<div class="modal fade" id="addnew">
-					    <div class="modal-dialog modal-sm">
-						<div class="modal-content">	      
-						<!-- Modal body -->
-						<div class="modal-body">			    		
-			    		 <h4>Add new Card</h4>
-			    		  <form:form action="addcard" modelAttribute="card" 
-		                    method="post" role="form" class="contactForm"> 
-		                    <div class="form-group">
-		                    <form:input type="hidden" path="id" value="${user_account.id}"/>
-		                    </div>
-		                    <div class="form-group">
-		                    <form:input type="number" class="form-control"  path="cardno" placeholder="Card Number" min="14" />
-		                    </div>
-		                    <div class="form-group">
-		                    <form:input type="number" class="form-control"  path="secode" placeholder="Card Security" min="3" />
-							</div>
-							<div class="form-group">
-		                    <form:input type="month" class="form-control"  path="expiry" placeholder="Expiry Date"/>
-		                    </div>
-		                    <button class="btn btn-main btn-small btn-round" type="submit">Add </button>
-				            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		                   </form:form>
-			    		  
-	                     </div>
-					    </div>	
-				      </div>
-					  </div>
-  
-   
 					
 					<div class="modal fade" id="addnew">
 					    <div class="modal-dialog modal-sm">
@@ -492,16 +474,30 @@
 			                    <div class="form-group">
 			                    <form:input path="price" placeholder="product price" class="form-control"/>
 			                    </div>
-			                    <div class="form-group">
-			                    <form:input path="color" placeholder="product color" class="form-control"/>
+			                    <div class="form-group">			                    
+			                    <form:select path="color" id="color" multiple="true" class="form-control" required="required" > 
+			                    <option value="Black" >Select Color</option>
+			                    <c:forEach items="${cols}" var="item">			                        
+			                        <option value="${item}" > ${item}</option>
+			                    </c:forEach>
+			                    </form:select>
 			                    </div>
+			                    <div class="form-group">
+			                    <form:select path="size" id="size" multiple="true" class="form-control" required="required" > 
+			                    <option value="L" >Select Size</option>
+			                    <c:forEach items="${sizes}" var="item">
+			                            <option value="${item}" > ${item}</option>
+			                            </c:forEach>
+			                    </form:select>
+			                    </div>
+			                    
 			                    <div class="form-group">
 			                    <form:textarea path="des" rows="6"  placeholder="Description" class="form-control"  required="required"/>
 			                    </div>
 			                    <form:input path="file" type="file" class="form-control" />					                             
 								<form:input path="file" type="file" class="form-control" />
 								<form:input path="file" type="file" class="form-control" /> 
-			                    <form:input type="hidden" path="email" value="${loggedInuser}" /><br>
+			                    <form:input type="hidden" path="email" value="${user_account.email}" /><br>
 			                    <button class="btn btn-main btn-icon" type="submit">Add </button>
 					           
 			                    </form:form>

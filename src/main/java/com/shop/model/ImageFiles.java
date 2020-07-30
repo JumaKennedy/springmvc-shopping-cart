@@ -1,16 +1,26 @@
 package com.shop.model;
 
-import javax.persistence.*;
-
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name="images")
 public class ImageFiles {
 	
+	
+	
+	public ImageFiles() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
@@ -20,6 +30,10 @@ public class ImageFiles {
 	private long size;
 	@Column(name="stockId")
 	private Long stockId;
+	
+	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.DETACH )
+	@JoinColumn(name="products_id")
+	private Products products;
 	
 	public Long getId() {
 		return id;
@@ -51,6 +65,13 @@ public class ImageFiles {
 	}
 	public void setStockId(Long stockId) {
 		this.stockId = stockId;
+	}
+	
+	public Products getProducts() {
+		return products;
+	}
+	public void setProducts(Products products) {
+		this.products = products;
 	}
 	@Override
 	public String toString() {

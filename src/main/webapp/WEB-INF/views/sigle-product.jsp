@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 
@@ -73,7 +74,7 @@
 		<div class="row mt-20">
 			<div class="col-md-5">
 			
-				<div class="single-product-slider">
+						<div class="single-product-slider">
 												<div id='carousel-custom' class='carousel slide' data-ride='carousel'>
 													<div class='carousel-outer'>
 														<!-- me art lab slider -->
@@ -105,6 +106,10 @@
 														    <li data-target='#carousel-custom' data-slide-to='${no}' class=''>
 															<img src='static/img/products/${item.id}/${img.image}' alt='' />
 														    </li>
+														    <sec:authorize access="hasAnyAuthority('ADMIN','DBA')">
+														    <a href="removeimg?id=${item.id}&imgid=${img.id}&img=${img.id}"><i class="tf-ion-close"></i></a>
+														    <a href="setimg?id=${item.id}&img=${img.image}"> set <i class="tf-ion-plus"></i></a>
+														    </sec:authorize>
 														    </c:forEach>
 														
 													</ol>
@@ -140,18 +145,18 @@
 												<form:input type="hidden" path="prod_id" value="${item.id}" />			         					    
 												<div class="product-size">
 													<span>Size:</span>
-													<form:select type="text" path="size" multiple="false" class="form-control"  required="true" >							                           
-							                            <c:forEach items="${size}" var="item">
-							                            <option value="${item}" > ${item}</option>
+													<form:select type="text" path="size" multiple="false" class="form-control"  required="required"  >							                           
+							                            <c:forEach items="${item.size}" var="siz">
+							                            <option value="${siz}" > ${siz}</option>
 							                            </c:forEach>	                                                          
 						                            </form:select> 
 												</div>
 												
 												<div class="product-size">
 													<span>Color:</span>
-													<form:select type="text" path="color" multiple="false" class="form-control"  required="true" >						                            
-						                            <c:forEach items="${col}" var="item">
-						                            <option value="${item}" > ${item}</option>
+													<form:select type="text" path="color" multiple="false" class="form-control"  required="required"  >						                            
+						                            <c:forEach items="${item.color}" var="col">
+						                            <option value="${col}" > ${col}</option>
 						                            </c:forEach>	                                                          
 					                                </form:select> 
 												</div>
@@ -167,6 +172,9 @@
 												
 												<button id="btn" class="btn btn-main mt-20">Add To Cart</button>
 												<a href="shop" class="btn btn-main mt-20">Continue Shopping</a>
+												<sec:authorize access="hasAnyAuthority('ADMIN','DBA')">
+													<a href="deleteproduct?id=${img.id}"  class="btn btn-main mt-20"><i class="tf-ion-close"></i></a> 
+												</sec:authorize>
 												</form:form>
 											</div>
 			</div>

@@ -24,6 +24,7 @@ public class Products {
 	private String name;
 	private double price;
 	private String color;
+	private String size;
 	private String type;
 	private String email;
 	//@Size(max = 500)
@@ -109,6 +110,12 @@ public class Products {
 	}
 	public void setDes(String des) {
 		this.des = des;
+	}
+	public String getSize() {
+		return size;
+	}
+	public void setSize(String size) {
+		this.size = size;
 	}
 	
 	

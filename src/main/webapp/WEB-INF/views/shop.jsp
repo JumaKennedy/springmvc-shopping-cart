@@ -279,18 +279,18 @@
 												<form:input type="hidden" path="prod_id" value="${modal.id}" />
 												<div class="product-size">
 													<span>Size:</span>
-													<form:select type="text" path="size" multiple="false" class="form-control"  required="true" >							                            
-							                            <c:forEach items="${size}" var="item">
-							                            <option value="${item}" > ${item}</option>
+													<form:select type="text" path="size" multiple="false" class="form-control"  required="required" >							                           
+							                            <c:forEach items="${modal.size}" var="siz">
+							                            <option value="${siz}" > ${siz}</option>
 							                            </c:forEach>	                                                          
 						                            </form:select> 
 												</div>
 												
 												<div class="product-size">
 													<span>Color:</span>
-													<form:select type="text" path="color" multiple="false" class="form-control"  required="true" >
-						                            <c:forEach items="${col}" var="item">
-						                            <option value="${item}" > ${item}</option>
+													<form:select type="text" path="color" multiple="false" class="form-control"  required="required" >
+						                            <c:forEach items="${modal.color}" var="col">
+						                            <option value="${col}" > ${col}</option>
 						                            </c:forEach>	                                                          
 					                                </form:select> 
 												</div>

@@ -30,6 +30,19 @@ public class ShopperApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
+		 HashSet<Role> roles=new HashSet<Role>();
+		 Role role_1=new Role(1, "USER");
+		 Role role_2=new Role(2, "DBA");
+		 Role role_3=new Role(3, "ADMIN");
+		 
+		 roles.add(role_1);
+		 roles.add(role_2);
+		 roles.add(role_3);
+		 
+		if(roleRepository.findAll().isEmpty()){			
+			roleRepository.saveAll(roles);
+		}
+		
 		if(!userRepository.getByEmail("admin@email.com").isPresent()) {
 			Users user=new Users();
 			user.setFname("Admin");
@@ -39,8 +52,7 @@ public class ShopperApplication implements CommandLineRunner{
 			user.setPassword2("123");			
 			user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 	        user.setActive(1);
-	        Role role=new Role(3, "ADMIN");
-	        user.setRoles(new HashSet<Role>(Arrays.asList(role)));
+	        user.setRoles(new HashSet<Role>(roles));
 	        userRepository.save(user);
 	       
 		}
