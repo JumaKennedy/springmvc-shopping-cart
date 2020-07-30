@@ -14,6 +14,8 @@ public class Addressess {
 	
 	public Addressess() {		
 	}
+	
+
 	@Id
 	private Long id;
 	private String street;
@@ -35,6 +37,14 @@ public class Addressess {
 	
 	@Column(name="file_name")
 	private String filename;
+	
+	public Addressess(String street, String city, String state, String zip) {
+		super();
+		this.street = street;
+		this.city = city;
+		this.state = state;
+		this.zip = zip;
+	}
 
 	public Long getId() {
 		return id;

@@ -16,7 +16,8 @@ import org.springframework.stereotype.Service;
 @Service
 @Transactional
 public class SecurityServiceImpl implements SecurityService{
-    @Autowired
+    
+	@Autowired
     private AuthenticationManager authenticationManager;
 
     @Autowired

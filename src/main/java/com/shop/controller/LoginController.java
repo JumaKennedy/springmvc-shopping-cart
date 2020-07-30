@@ -93,22 +93,20 @@ public class LoginController {
 			e.printStackTrace();
 		}
 		
-	return "redirect:/login";	
+	return "redirect:/profile";	
 	}
 	
 	@GetMapping("/login")
     public String login(Model model, String error, String logout,  String expired) {
     	try {
 			if (expired != null) {				
-				model.addAttribute("logout", "Your Have been logged out due to inactivity.");
-			    return "redirect:/logout";
-				
+				model.addAttribute("expired", "Your Have been logged out due to inactivity.");			   
 			}
 			if (error != null) {
 			    model.addAttribute("error", "Your username and password is invalid.");
 			}
 			if (logout != null) {
-			    model.addAttribute("message", "You have been logged out.");
+			    model.addAttribute("logout", "You have been logged out.");
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

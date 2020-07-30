@@ -50,7 +50,7 @@
           
           <h2 class="text-center">Login </h2>
           <form action="login" method="post"  class="text-left clearfix" >
-          <p><span class="text-success"> ${msg} 
+          <p><span class="text-success"> ${msg}  ${logout} 
           </span>
           
           <span class="text-danger">${error} ${expired}</span>          

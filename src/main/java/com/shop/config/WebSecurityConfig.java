@@ -39,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/cutomerOrders","/activate","/editrole","/saveproduct","/editproduct","/deleteproduct","/delete")
                 .hasAnyAuthority("ADMIN","DBA")
                 
-                .antMatchers("/profile","/myorders","/admin","/addcoment","/addcoment","/addimages",
+                .antMatchers("/profile","/myorders","/addcoment","/addcoment","/addimages",
                 			 "/addcoment","/updatecontact","/addcard","/addphone","/deletephone","/deletecard","/logout").
                 hasAnyAuthority("ADMIN","USER","DBA").anyRequest()
                 
@@ -50,10 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .and()
-                .logout().logoutUrl("/logout")
-                .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID")
-                .permitAll();
+                .logout().permitAll();
                 
                 
     }
